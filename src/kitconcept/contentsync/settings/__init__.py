@@ -40,10 +40,9 @@ def get_settings() -> SyncSettings:
         ignore_unknown_envvars=True,
         load_dotenv=True,
     )
-    default = raw_settings["default"]
-    debug = default["debug"]
-    base_dst_folder = default["base_dst_folder"]
-    syncer = _get_syncer(default["sync"])
+    debug = raw_settings["debug"]
+    base_dst_folder = raw_settings["base_dst_folder"]
+    syncer = _get_syncer(raw_settings["klass"])
     src = _get_client(raw_settings["src"])
     dst = _get_client(raw_settings["dst"])
     settings = SyncSettings(

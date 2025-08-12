@@ -1,6 +1,5 @@
-[default]
 debug = false
-sync = "kitconcept.contentsync.sync.person.contentsync"
+klass = "kitconcept.contentsync.sync.person.PersonSyncer"
 base_dst_folder = "/"
 
 [src]

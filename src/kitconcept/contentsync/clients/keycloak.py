@@ -8,7 +8,6 @@ from kitconcept.contentsync.utils import dotted_name_for_object
 
 
 class KeycloakClient(ConnectionClient):
-
     system = "Keycloak"
     _connection: KeycloakOpenIDConnection
     _client: KeycloakAdmin

@@ -1,4 +1,4 @@
-from kitconcept.contentsync.utils import dotted_name_for_object
+from kitconcept.contentsync import utils
 
 import typer
 
@@ -15,7 +15,7 @@ def tool_information():
 
     typer.echo(f"{PACKAGE_NAME}: {__version__}")
     settings = get_settings()
-    typer.echo(f"- Sync Class: {dotted_name_for_object(settings.sync)}")
+    typer.echo(f"- Sync Class: {utils.dotted_name_for_class(settings.sync)}")
     typer.echo(f"- Source: {settings.src}")
     typer.echo(f"- Destination: {settings.dst}")
     typer.echo(f"- Destination (Base folder): {settings.base_dst_folder}")

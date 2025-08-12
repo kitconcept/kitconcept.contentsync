@@ -6,7 +6,7 @@ from kitconcept.contentsync.sync import ContentSyncer
 from kitconcept.contentsync.utils import relative_path
 
 
-class contentsync(ContentSyncer):
+class PersonSyncer(ContentSyncer):
     src_client: KeycloakClient
     dst_client: PloneClient
     item_converter: KeycloakPersonConverter
