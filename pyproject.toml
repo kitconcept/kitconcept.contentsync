@@ -1,0 +1,167 @@
+[project]
+name = "kitconcept.contentsync"
+description = "Synchronize content items from external sources into a Plone site."
+readme = "README.md"
+dynamic = ["version"]
+authors = [
+    { name = "kitconcept GmbH", email = "info@kitconcept.com" }
+]
+keywords = ["Plone", "Python", "Volto",]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Environment :: Web Environment",
+  "Framework :: Plone",
+  "Intended Audience :: Developers",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.13",
+  "Operating System :: OS Independent",
+  "License :: OSI Approved :: GNU General Public License v2 (GPLv2)",
+]
+requires-python = ">=3.13"
+dependencies = [
+    "collective-html2blocks",
+    "python-slugify>=8.0.4",
+    "dynaconf>=3.2.7",
+    "typer>=0.15.1",
+    "requests>=2.32.4",
+    "python-keycloak>=5.7.0",
+]
+
+[dependency-groups]
+test = [
+    "mypy>=1.15.0",
+    "pytest>=8.3.4",
+    "pytest-cov>=6.0.0",
+    "pytest-docker>=3.2.3",
+    "types-requests>=2.32.4.20250809",
+]
+
+[project.scripts]
+contentsync = "kitconcept.contentsync.cli:cli"
+
+[project.urls]
+Documentation = "https://github.com/kitconcept/kitconcept.contentsync#readme"
+Issues = "https://github.com/kitconcept/kitconcept.contentsync/issues"
+Source = "https://github.com/kitconcept/kitconcept.contentsync"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.version]
+path = "src/kitconcept/contentsync/__init__.py"
+
+[tool.hatch.build]
+strict-naming = false
+packages = ["src/kitconcept", "src/kitconcept/contentsync"]
+
+[tool.uv]
+default-groups = ["test"]
+
+[tool.uv.sources]
+collective-html2blocks = { git = "https://github.com/collective/collective.html2blocks" }
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.coverage.run]
+source_pkgs = ["kitconcept.contentsync", "tests"]
+branch = true
+parallel = true
+
+
+[tool.towncrier]
+package = "kitconcept.contentsync"
+package_dir = "src"
+directory = "news/"
+filename = "CHANGELOG.md"
+start_string = "<!-- towncrier release notes start -->\n"
+title_format = "## {version} ({project_date})"
+template = "news/.changelog_template.jinja"
+issue_format = "[#{issue}](https://github.com/kitconcept/kitconcept.contentsync/issues/{issue})"
+underlines = ["", "", ""]
+
+[[tool.towncrier.type]]
+directory = "breaking"
+name = "Breaking changes:"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "feature"
+name = "Feature"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "bugfix"
+name = "Bugfix"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "internal"
+name = "Internal"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "documentation"
+name = "Documentation"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "tests"
+name = "Tests"
+showcontent = true
+
+[tool.ruff]
+target-version = "py311"
+line-length = 88
+fix = true
+lint.select = [
+    # flake8-2020
+    "YTT",
+    # flake8-bandit
+    "S",
+    # flake8-bugbear
+    "B",
+    # flake8-builtins
+    "A",
+    # flake8-comprehensions
+    "C4",
+    # flake8-debugger
+    "T10",
+    # flake8-simplify
+    "SIM",
+    # mccabe
+    "C90",
+    # pycodestyle
+    "E", "W",
+    # pyflakes
+    "F",
+    # pygrep-hooks
+    "PGH",
+    # pyupgrade
+    "UP",
+    # ruff
+    "RUF",
+]
+lint.ignore = [
+    # DoNotAssignLambda
+    "E731",
+]
+
+[tool.ruff.lint.isort]
+case-sensitive = false
+no-sections = true
+force-single-line = true
+from-first = true
+lines-after-imports = 2
+lines-between-types = 1
+
+[tool.ruff.format]
+preview = true
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["E501", "RUF001", "S101"]
+
+[tool.mypy]
+ignore_missing_imports = true
+check_untyped_defs = true

@@ -1,0 +1,69 @@
+---
+
+services:
+
+  plone:
+    build:
+      context: containers/plone
+      args:
+        PLONE_VERSION: ${PLONE_VERSION:-6.1}
+    ports:
+      - 8080:8080
+
+  keycloak:
+    build:
+      context: containers/keycloak
+      args:
+        KEYCLOAK_VERSION: ${KEYCLOAK_VERSION:-26.2.4}
+    command:
+      - 'start-dev'
+      - '--import-realm'
+      - '--bootstrap-admin-username'
+      - 'admin'
+      - '--bootstrap-admin-password'
+      - 'admin'
+    depends_on:
+      - keycloak-db
+      - ldap
+    environment:
+      JAVA_OPTS_APPEND: -Dkeycloak.profile.feature.upload_scripts=enabled
+      KC_DB: postgres
+      KC_DB_PASSWORD: postgres
+      KC_DB_URL: jdbc:postgresql://keycloak-db/keycloak
+      KC_DB_USERNAME: postgres
+      KC_HEALTH_ENABLED: false
+      KC_HTTP_ENABLED: true
+      KC_METRICS_ENABLED: false
+      KC_HOSTNAME_URL: http://127.0.0.1:8180/
+      KC_PROXY: reencrypt
+    volumes:
+      - ./containers/keycloak/import:/opt/keycloak/data/import
+    ports:
+      - 8180:8080
+
+  keycloak-db:
+    image: postgres:14.9
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-q", "-d", "postgres", "-U", "postgres" ]
+      timeout: 45s
+      interval: 5s
+      retries: 10
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: keycloak
+      POSTGRES_HOST: postgres
+
+  ldap:
+    image: osixia/openldap:${OPENLDAP_VERSION:-1.5.0}
+    environment:
+        - "LDAP_ORGANISATION=ploneorg"
+        - "LDAP_DOMAIN=plone.org"
+        - "LDAP_BASE_DN=dc=plone,dc=org"
+        - "LDAP_ADMIN_PASSWORD=n0m0res3crets"
+        - "LDAP_SEED_INTERNAL_LDIF_PATH=/data/import/data.ldif"
+    ports:
+        - 389:389
+        - 636:636
+    volumes:
+      - ./containers/openldap/import:/data/import

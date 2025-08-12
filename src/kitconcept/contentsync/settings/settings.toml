@@ -1,0 +1,19 @@
+[default]
+debug = false
+sync = "kitconcept.contentsync.sync.person.contentsync"
+base_dst_folder = "/"
+
+[src]
+type="keycloak"
+server_url="http://localhost:8180"
+realm_name="plone"
+client_id="plone-admin"
+client_secret_key="12345678"
+verify=false
+
+[dst]
+type="plone"
+site_url="http://localhost:8080/Plone"
+api_url="http://localhost:8080/Plone/++api++"
+username="admin"
+password="admin"

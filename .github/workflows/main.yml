@@ -1,0 +1,69 @@
+name: "kitconcept.intranet: CI"
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+
+  config:
+    name: "Config: Compute values used in workflow"
+    uses: ./.github/workflows/config.yml
+
+  test:
+    uses: ./.github/workflows/test.yml
+    needs:
+        - config
+    with:
+        python-version: ${{ needs.config.outputs.python-version }}
+    if: ${{ needs.config.outputs.backend == 'true' }}
+    permissions:
+      contents: read
+      packages: write
+
+  qa:
+    uses: ./.github/workflows/qa.yml
+    needs:
+        - config
+    with:
+        python-version: ${{ needs.config.outputs.python-version }}
+    if: ${{ needs.config.outputs.backend == 'true' }}
+    permissions:
+      contents: read
+      packages: write
+
+  docker:
+    uses: ./.github/workflows/docker.yml
+    needs:
+        - config
+        - qa
+        - test
+    with:
+      base-tag: ${{ needs.config.outputs.base-tag }}
+      image-name-prefix: ${{ needs.config.outputs.image-name-prefix }}
+      image-name-suffix: "sync"
+      python-version: ${{ needs.config.outputs.python-version }}
+    if: ${{ (always() && !contains(needs.*.result, 'failure')) }}
+    permissions:
+      contents: read
+      packages: write
+
+  report:
+    name: "Final report"
+    if: ${{ always() }}
+    runs-on: ubuntu-latest
+    needs:
+      - config
+      - qa
+      - test
+      - docker
+    steps:
+      - name: Write report
+        run: |
+          echo '# Workflow Report' >> $GITHUB_STEP_SUMMARY
+          echo '| Job ID | Conclusion |' >> $GITHUB_STEP_SUMMARY
+          echo '| --- | --- |' >> $GITHUB_STEP_SUMMARY
+          echo '| config | ${{ needs.config.result }} |' >> $GITHUB_STEP_SUMMARY
+          echo '| qa | ${{ needs.qa.result }} |' >> $GITHUB_STEP_SUMMARY
+          echo '| test | ${{ needs.test.result }} |' >> $GITHUB_STEP_SUMMARY
+          echo '| docker | ${{ needs.docker.result }} |' >> $GITHUB_STEP_SUMMARY

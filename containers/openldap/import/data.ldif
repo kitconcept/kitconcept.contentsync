@@ -1,0 +1,83 @@
+# LDIF file to add organizational unit "ou=users" under "dc=plone,dc=org"
+dn: ou=users,dc=plone,dc=org
+changetype: add
+objectClass: organizationalUnit
+ou: users
+
+# LDIF file to add organizational unit "ou=groups" under "dc=plone,dc=org"
+dn: ou=groups,dc=plone,dc=org
+changetype: add
+objectClass: organizationalUnit
+ou: groups
+
+# LDIF file to Create user "ericof" in "ou=users" under "dc=plone,dc=org"
+dn: cn=ericof,ou=users,dc=plone,dc=org
+changetype: add
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+cn: ericof
+givenName: Erico
+sn: Andrei
+uid: ericof
+mail: ericof@plone.org
+l: Brasilia, DF, Brasil
+userPassword: plone123
+
+# LDIF file to Create user "dtremea" in "ou=users" under "dc=plone,dc=org"
+dn: cn=dtremea,ou=users,dc=plone,dc=org
+changetype: add
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+cn: dtremea
+givenName: Dorneles
+sn: Tremea
+uid: dtremea
+mail: dtremea@plone.org
+l: Garibaldi, Rio Grande do Sul, Brazil
+userPassword: #Int3rRul3z
+
+# LDIF file to Create user "janedoe" in "ou=users" under "dc=plone,dc=org"
+dn: cn=janedoe,ou=users,dc=plone,dc=org
+changetype: add
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+cn: janedoe
+givenName: Jane
+sn: Doe
+uid: janedoe
+mail: janedoe@example.com
+l: Springfield, NH, USA
+userPassword: J4N3@d0e$!
+
+# Group: foundation-members
+dn: cn=foundation-members,ou=groups,dc=plone,dc=org
+changetype: add
+objectClass: top
+objectClass: groupOfUniqueNames
+cn: foundation-members
+description: Plone Foundation Members
+uniqueMember: cn=dtremea,ou=users,dc=plone,dc=org
+uniqueMember: cn=ericof,ou=users,dc=plone,dc=org
+
+# Group: core-developers
+dn: cn=core-developers,ou=groups,dc=plone,dc=org
+changetype: add
+objectClass: top
+objectClass: groupOfUniqueNames
+cn: core-developers
+description: Core developers
+uniqueMember: cn=dtremea,ou=users,dc=plone,dc=org
+uniqueMember: cn=janedoe,ou=users,dc=plone,dc=org
+uniqueMember: cn=ericof,ou=users,dc=plone,dc=org
+
+# Group: site-editors
+dn: cn=site-editors,ou=groups,dc=plone,dc=org
+changetype: add
+objectClass: top
+objectClass: groupOfUniqueNames
+cn: site-editors
+description: Site Editors
+uniqueMember: cn=ericof,ou=users,dc=plone,dc=org
