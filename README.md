@@ -9,10 +9,10 @@
 [![PyPI - Status](https://img.shields.io/pypi/status/kitconcept.contentsync)](https://pypi.org/project/kitconcept.contentsync/)
 
 
-[![Code Quality](https://github.com/kitconceptkitconcept.contentsync/actions/workflows/main.yml/badge.svg)](https://github.com/kitconceptkitconcept.contentsync/actions/workflows/main.yml)
+[![Code Quality](https://github.com/kitconcept/kitconcept.contentsync/actions/workflows/main.yml/badge.svg)](https://github.com/kitconcept/kitconcept.contentsync/actions/workflows/main.yml)
 
-[![GitHub contributors](https://img.shields.io/github/contributors/kitconceptkitconcept.contentsync)](https://github.com/kitconceptkitconcept.contentsync)
-[![GitHub Repo stars](https://img.shields.io/github/stars/kitconceptkitconcept.contentsync?style=social)](https://github.com/kitconceptkitconcept.contentsync)
+[![GitHub contributors](https://img.shields.io/github/contributors/kitconcept/kitconcept.contentsync)](https://github.com/kitconcept/kitconcept.contentsync)
+[![GitHub Repo stars](https://img.shields.io/github/stars/kitconcept/kitconcept.contentsync?style=social)](https://github.com/kitconcept/kitconcept.contentsync)
 
 </div>
 
