@@ -2,6 +2,7 @@ from kitconcept.contentsync import _types as t
 
 
 class ConnectionClient:
+    system: str
     _config: t.ClientConfig
 
     def __init__(self, config: t.ClientConfig):

@@ -4,9 +4,12 @@ from keycloak.exceptions import KeycloakGetError
 from kitconcept.contentsync import _types as t
 from kitconcept.contentsync import logger
 from kitconcept.contentsync.clients import ConnectionClient
+from kitconcept.contentsync.utils import dotted_name_for_object
 
 
 class KeycloakClient(ConnectionClient):
+
+    system = "Keycloak"
     _connection: KeycloakOpenIDConnection
     _client: KeycloakAdmin
     _config: t.KeycloakConfig
@@ -38,3 +41,13 @@ class KeycloakClient(ConnectionClient):
         client = self._client
         groups_info = client.get_groups({"briefRepresentation": False})
         return groups_info
+
+    def __repr__(self) -> str:
+        """Return a string representation of the KeycloakClient."""
+        return (
+            "\n"
+            f" - {self.system} ({dotted_name_for_object(self)})\n"
+            f" - Server: {self._config.server_url}\n"
+            f" - Client ID: {self._config.client_id}\n"
+            f" - Realm: {self._config.realm_name}\n"
+        )

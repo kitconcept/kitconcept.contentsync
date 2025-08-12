@@ -1,6 +1,7 @@
 from kitconcept.contentsync import _types as t
 from kitconcept.contentsync import logger
 from kitconcept.contentsync.clients import ConnectionClient
+from kitconcept.contentsync.utils import dotted_name_for_object
 from requests.auth import HTTPBasicAuth
 from typing import Any
 from urllib.parse import urljoin
@@ -10,6 +11,8 @@ import requests
 
 class PloneClient(ConnectionClient):
     """Base client for Plone REST API operations"""
+
+    system = "Plone"
 
     _config: t.PloneConfig
     session: requests.Session
@@ -28,10 +31,12 @@ class PloneClient(ConnectionClient):
                 config.basic_auth["username"],
                 config.basic_auth["password"],
             )
-        self.session.headers.update({
-            "Accept": "application/json",
-            "Content-Type": "application/json",
-        })
+        self.session.headers.update(
+            {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+            }
+        )
 
     def authenticate(self):
         """Authenticate user with Plone REST API"""
@@ -153,3 +158,13 @@ class PloneClient(ConnectionClient):
             return response.json()
         logger.error(f"Failed to search content at {endpoint}: {response.status_code}")
         return {}
+
+    def __repr__(self) -> str:
+        """Return a string representation of the KeycloakClient."""
+        return (
+            "\n"
+            f" - {self.system} ({dotted_name_for_object(self)})\n"
+            f" - Site URL: {self.site_url}\n"
+            f" - API URL: {self.api_url}\n"
+            f" - Username: {self._config.username}\n"
+        )

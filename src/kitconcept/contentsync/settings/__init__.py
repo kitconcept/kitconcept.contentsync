@@ -36,7 +36,7 @@ def _get_client(settings) -> ConnectionClient:
 def get_settings() -> SyncSettings:
     raw_settings = Dynaconf(
         preload=[f"{LOCAL_PATH}/settings.toml"],
-        envvar_prefix="contentsync",
+        envvar_prefix="SYNC",
         ignore_unknown_envvars=True,
         load_dotenv=True,
     )
