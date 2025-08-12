@@ -28,12 +28,10 @@ class PloneClient(ConnectionClient):
                 config.basic_auth["username"],
                 config.basic_auth["password"],
             )
-        self.session.headers.update(
-            {
-                "Accept": "application/json",
-                "Content-Type": "application/json",
-            }
-        )
+        self.session.headers.update({
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+        })
 
     def authenticate(self):
         """Authenticate user with Plone REST API"""
