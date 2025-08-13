@@ -21,7 +21,7 @@ class ContentSyncer:
         self.dst_site_url = dst_client.site_url
         self.item_converter = ItemConverter(base_path=base_dst_folder)
 
-    def get_src_items(self) -> dict[str, dict]:
+    def get_src_items(self, transform: bool = True) -> dict[str, dict]:
         """Retrieve items from the source client."""
         return {}
 
@@ -62,6 +62,11 @@ class ContentSyncer:
         path = item.pop("@id")
         self.dst_client.delete_content(path)
         return path
+
+    def dump_contents(self, transform: bool = True) -> dict[str, dict]:
+        """Dump contents from the source client."""
+        src_items = self.get_src_items(transform)
+        return src_items
 
     def __call__(self) -> t.ContentSyncerReport:
         """Perform the synchronization process."""

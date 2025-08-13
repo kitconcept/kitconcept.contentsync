@@ -435,21 +435,24 @@
   "webAuthnPolicyPasswordlessAcceptableAaguids" : [ ],
   "webAuthnPolicyPasswordlessExtraOrigins" : [ ],
   "users" : [ {
-    "id" : "1f0e98b9-27e0-42db-9285-015a0acc58a5",
+    "id" : "329b236b-1f64-4873-848e-13e6053a869f",
     "username" : "dtremea",
     "firstName" : "Dorneles",
     "lastName" : "Tremea",
     "email" : "dtremea@plone.org",
     "emailVerified" : false,
     "attributes" : {
-      "location" : [ "Garibaldi, Rio Grande do Sul, Brazil" ],
       "LDAP_ENTRY_DN" : [ "cn=dtremea,ou=users,dc=plone,dc=org" ],
-      "LDAP_ID" : [ "c04b7778-0b18-1040-8fab-db383d5f3309" ],
-      "createTimestamp" : [ "20250811160531Z" ],
-      "modifyTimestamp" : [ "20250811160531Z" ]
+      "phone" : [ "+555132232323" ],
+      "mobile" : [ "+555199992323" ],
+      "location" : [ "Garibaldi, Rio Grande do Sul, Brazil" ],
+      "fullname" : [ "Dorneles Tremea" ],
+      "LDAP_ID" : [ "7e6acb46-0ca4-1040-8b6d-816234385567" ],
+      "createTimestamp" : [ "20250813151821Z" ],
+      "modifyTimestamp" : [ "20250813151821Z" ]
     },
     "origin" : "e460c359-ad37-4c1d-b119-e05c2ecdf1bc",
-    "createdTimestamp" : 1754928400857,
+    "createdTimestamp" : 1755098439950,
     "enabled" : true,
     "totp" : false,
     "federationLink" : "e460c359-ad37-4c1d-b119-e05c2ecdf1bc",
@@ -460,21 +463,24 @@
     "notBefore" : 0,
     "groups" : [ "/core-developers", "/foundation-members" ]
   }, {
-    "id" : "7413eb81-9588-4bcb-b49f-65a73fd8cd39",
+    "id" : "2b236be1-9655-438f-9a16-4b61ea344906",
     "username" : "ericof",
     "firstName" : "Erico",
     "lastName" : "Andrei",
     "email" : "ericof@plone.org",
     "emailVerified" : false,
     "attributes" : {
-      "location" : [ "Brasilia, DF, Brasil" ],
       "LDAP_ENTRY_DN" : [ "cn=ericof,ou=users,dc=plone,dc=org" ],
-      "LDAP_ID" : [ "c04ae948-0b18-1040-8faa-db383d5f3309" ],
-      "createTimestamp" : [ "20250811160531Z" ],
-      "modifyTimestamp" : [ "20250811160531Z" ]
+      "phone" : [ "+551132232323" ],
+      "mobile" : [ "+551199992323" ],
+      "location" : [ "Brasilia, DF, Brasil" ],
+      "fullname" : [ "Erico Andrei" ],
+      "LDAP_ID" : [ "7e6a4cde-0ca4-1040-8b6c-816234385567" ],
+      "createTimestamp" : [ "20250813151821Z" ],
+      "modifyTimestamp" : [ "20250813151821Z" ]
     },
     "origin" : "e460c359-ad37-4c1d-b119-e05c2ecdf1bc",
-    "createdTimestamp" : 1754928400843,
+    "createdTimestamp" : 1755098439937,
     "enabled" : true,
     "totp" : false,
     "federationLink" : "e460c359-ad37-4c1d-b119-e05c2ecdf1bc",
@@ -485,7 +491,7 @@
     "notBefore" : 0,
     "groups" : [ "/core-developers", "/foundation-members", "/site-editors" ]
   }, {
-    "id" : "dc37c367-5737-4620-90bc-d0eca0c750fa",
+    "id" : "ac15fa76-831d-4220-b588-b389e22d7317",
     "username" : "janedoe",
     "firstName" : "Jane",
     "lastName" : "Doe",
@@ -493,13 +499,14 @@
     "emailVerified" : false,
     "attributes" : {
       "location" : [ "Springfield, NH, USA" ],
+      "fullname" : [ "Jane Doe" ],
       "LDAP_ENTRY_DN" : [ "cn=janedoe,ou=users,dc=plone,dc=org" ],
-      "LDAP_ID" : [ "c04bc32c-0b18-1040-8fac-db383d5f3309" ],
-      "createTimestamp" : [ "20250811160531Z" ],
-      "modifyTimestamp" : [ "20250811160531Z" ]
+      "LDAP_ID" : [ "7e6afad0-0ca4-1040-8b6e-816234385567" ],
+      "createTimestamp" : [ "20250813151821Z" ],
+      "modifyTimestamp" : [ "20250813151821Z" ]
     },
     "origin" : "e460c359-ad37-4c1d-b119-e05c2ecdf1bc",
-    "createdTimestamp" : 1754928400863,
+    "createdTimestamp" : 1755098439959,
     "enabled" : true,
     "totp" : false,
     "federationLink" : "e460c359-ad37-4c1d-b119-e05c2ecdf1bc",
@@ -1451,8 +1458,9 @@
       "consentRequired" : false,
       "config" : {
         "user.session.note" : "AUTH_TIME",
-        "id.token.claim" : "true",
         "introspection.token.claim" : "true",
+        "userinfo.token.claim" : "true",
+        "id.token.claim" : "true",
         "access.token.claim" : "true",
         "claim.name" : "auth_time",
         "jsonType.label" : "long"
@@ -1506,8 +1514,9 @@
       "consentRequired" : false,
       "config" : {
         "user.session.note" : "clientHost",
-        "id.token.claim" : "true",
         "introspection.token.claim" : "true",
+        "userinfo.token.claim" : "true",
+        "id.token.claim" : "true",
         "access.token.claim" : "true",
         "claim.name" : "clientHost",
         "jsonType.label" : "String"
@@ -1520,8 +1529,9 @@
       "consentRequired" : false,
       "config" : {
         "user.session.note" : "client_id",
-        "id.token.claim" : "true",
         "introspection.token.claim" : "true",
+        "userinfo.token.claim" : "true",
+        "id.token.claim" : "true",
         "access.token.claim" : "true",
         "claim.name" : "client_id",
         "jsonType.label" : "String"
@@ -1534,8 +1544,9 @@
       "consentRequired" : false,
       "config" : {
         "user.session.note" : "clientAddress",
-        "id.token.claim" : "true",
         "introspection.token.claim" : "true",
+        "userinfo.token.claim" : "true",
+        "id.token.claim" : "true",
         "access.token.claim" : "true",
         "claim.name" : "clientAddress",
         "jsonType.label" : "String"
@@ -1589,6 +1600,22 @@
   "identityProviderMappers" : [ ],
   "components" : {
     "org.keycloak.services.clientregistration.policy.ClientRegistrationPolicy" : [ {
+      "id" : "544e45aa-8249-4df0-b386-aa7c66850f8b",
+      "name" : "Allowed Protocol Mapper Types",
+      "providerId" : "allowed-protocol-mappers",
+      "subType" : "authenticated",
+      "subComponents" : { },
+      "config" : {
+        "allowed-protocol-mapper-types" : [ "oidc-usermodel-attribute-mapper", "oidc-usermodel-property-mapper", "saml-user-property-mapper", "oidc-sha256-pairwise-sub-mapper", "oidc-address-mapper", "saml-user-attribute-mapper", "oidc-full-name-mapper", "saml-role-list-mapper" ]
+      }
+    }, {
+      "id" : "b68fea24-8631-4fa1-94ed-aace143a8646",
+      "name" : "Consent Required",
+      "providerId" : "consent-required",
+      "subType" : "anonymous",
+      "subComponents" : { },
+      "config" : { }
+    }, {
       "id" : "0be03525-fb8e-4cf5-a769-0008058464a6",
       "name" : "Max Clients Limit",
       "providerId" : "max-clients",
@@ -1596,15 +1623,6 @@
       "subComponents" : { },
       "config" : {
         "max-clients" : [ "200" ]
-      }
-    }, {
-      "id" : "544e45aa-8249-4df0-b386-aa7c66850f8b",
-      "name" : "Allowed Protocol Mapper Types",
-      "providerId" : "allowed-protocol-mappers",
-      "subType" : "authenticated",
-      "subComponents" : { },
-      "config" : {
-        "allowed-protocol-mapper-types" : [ "oidc-sha256-pairwise-sub-mapper", "saml-user-attribute-mapper", "oidc-full-name-mapper", "saml-role-list-mapper", "oidc-usermodel-property-mapper", "saml-user-property-mapper", "oidc-usermodel-attribute-mapper", "oidc-address-mapper" ]
       }
     }, {
       "id" : "27b6e52b-b984-4848-b7a1-8486cca0e969",
@@ -1623,20 +1641,13 @@
       "subComponents" : { },
       "config" : { }
     }, {
-      "id" : "b68fea24-8631-4fa1-94ed-aace143a8646",
-      "name" : "Consent Required",
-      "providerId" : "consent-required",
-      "subType" : "anonymous",
-      "subComponents" : { },
-      "config" : { }
-    }, {
       "id" : "a619b744-7f98-4ed3-8862-d015e5862e57",
       "name" : "Allowed Protocol Mapper Types",
       "providerId" : "allowed-protocol-mappers",
       "subType" : "anonymous",
       "subComponents" : { },
       "config" : {
-        "allowed-protocol-mapper-types" : [ "oidc-sha256-pairwise-sub-mapper", "oidc-usermodel-attribute-mapper", "oidc-full-name-mapper", "saml-role-list-mapper", "saml-user-property-mapper", "oidc-usermodel-property-mapper", "oidc-address-mapper", "saml-user-attribute-mapper" ]
+        "allowed-protocol-mapper-types" : [ "oidc-address-mapper", "saml-role-list-mapper", "saml-user-property-mapper", "oidc-usermodel-property-mapper", "oidc-sha256-pairwise-sub-mapper", "oidc-full-name-mapper", "saml-user-attribute-mapper", "oidc-usermodel-attribute-mapper" ]
       }
     }, {
       "id" : "06fee4a7-63c4-4dc8-b229-18b3d231ed6a",
@@ -1676,44 +1687,6 @@
             "user.model.attribute" : [ "username" ]
           }
         }, {
-          "id" : "028032d9-c081-4de7-8617-43c9b555185a",
-          "name" : "last name",
-          "providerId" : "user-attribute-ldap-mapper",
-          "subComponents" : { },
-          "config" : {
-            "ldap.attribute" : [ "sn" ],
-            "is.mandatory.in.ldap" : [ "true" ],
-            "always.read.value.from.ldap" : [ "true" ],
-            "read.only" : [ "false" ],
-            "user.model.attribute" : [ "lastName" ]
-          }
-        }, {
-          "id" : "990a1c86-0d32-4d1a-9857-c75e31e63769",
-          "name" : "first name",
-          "providerId" : "user-attribute-ldap-mapper",
-          "subComponents" : { },
-          "config" : {
-            "ldap.attribute" : [ "givenName" ],
-            "attribute.force.default" : [ "true" ],
-            "is.mandatory.in.ldap" : [ "true" ],
-            "is.binary.attribute" : [ "false" ],
-            "read.only" : [ "true" ],
-            "always.read.value.from.ldap" : [ "true" ],
-            "user.model.attribute" : [ "firstName" ]
-          }
-        }, {
-          "id" : "1c675675-322c-4591-9141-8cc4bc26fa4e",
-          "name" : "creation date",
-          "providerId" : "user-attribute-ldap-mapper",
-          "subComponents" : { },
-          "config" : {
-            "ldap.attribute" : [ "createTimestamp" ],
-            "is.mandatory.in.ldap" : [ "false" ],
-            "always.read.value.from.ldap" : [ "true" ],
-            "read.only" : [ "true" ],
-            "user.model.attribute" : [ "createTimestamp" ]
-          }
-        }, {
           "id" : "793b3f9c-90c5-47bf-97be-7df87f7a9011",
           "name" : "groups",
           "providerId" : "group-ldap-mapper",
@@ -1721,18 +1694,18 @@
           "config" : {
             "membership.attribute.type" : [ "DN" ],
             "group.name.ldap.attribute" : [ "cn" ],
-            "preserve.group.inheritance" : [ "true" ],
             "membership.user.ldap.attribute" : [ "uid" ],
+            "preserve.group.inheritance" : [ "true" ],
             "groups.dn" : [ "ou=groups,dc=plone,dc=org" ],
             "mapped.group.attributes" : [ "description" ],
             "mode" : [ "READ_ONLY" ],
             "user.roles.retrieve.strategy" : [ "LOAD_GROUPS_BY_MEMBER_ATTRIBUTE" ],
             "membership.ldap.attribute" : [ "uniqueMember" ],
             "ignore.missing.groups" : [ "true" ],
-            "memberof.ldap.attribute" : [ "memberOf" ],
             "group.object.classes" : [ "groupOfUniqueNames" ],
-            "groups.path" : [ "/" ],
-            "drop.non.existing.groups.during.sync" : [ "true" ]
+            "memberof.ldap.attribute" : [ "memberOf" ],
+            "drop.non.existing.groups.during.sync" : [ "true" ],
+            "groups.path" : [ "/" ]
           }
         }, {
           "id" : "97c17ff0-d8e4-4809-80b7-dbf3dbc19217",
@@ -1747,6 +1720,86 @@
             "user.model.attribute" : [ "email" ]
           }
         }, {
+          "id" : "a66abcd3-a5a1-4e0d-9114-8fc2a20f2cb6",
+          "name" : "phone",
+          "providerId" : "user-attribute-ldap-mapper",
+          "subComponents" : { },
+          "config" : {
+            "ldap.attribute" : [ "telephoneNumber" ],
+            "attribute.force.default" : [ "true" ],
+            "is.mandatory.in.ldap" : [ "false" ],
+            "is.binary.attribute" : [ "false" ],
+            "always.read.value.from.ldap" : [ "false" ],
+            "read.only" : [ "true" ],
+            "user.model.attribute" : [ "phone" ]
+          }
+        }, {
+          "id" : "028032d9-c081-4de7-8617-43c9b555185a",
+          "name" : "last name",
+          "providerId" : "user-attribute-ldap-mapper",
+          "subComponents" : { },
+          "config" : {
+            "ldap.attribute" : [ "sn" ],
+            "is.mandatory.in.ldap" : [ "true" ],
+            "read.only" : [ "false" ],
+            "always.read.value.from.ldap" : [ "true" ],
+            "user.model.attribute" : [ "lastName" ]
+          }
+        }, {
+          "id" : "990a1c86-0d32-4d1a-9857-c75e31e63769",
+          "name" : "first name",
+          "providerId" : "user-attribute-ldap-mapper",
+          "subComponents" : { },
+          "config" : {
+            "ldap.attribute" : [ "givenName" ],
+            "attribute.force.default" : [ "true" ],
+            "is.mandatory.in.ldap" : [ "true" ],
+            "is.binary.attribute" : [ "false" ],
+            "always.read.value.from.ldap" : [ "true" ],
+            "read.only" : [ "true" ],
+            "user.model.attribute" : [ "firstName" ]
+          }
+        }, {
+          "id" : "74a97bd3-4b50-4b4a-b52f-fef228ace57e",
+          "name" : "mobile",
+          "providerId" : "user-attribute-ldap-mapper",
+          "subComponents" : { },
+          "config" : {
+            "ldap.attribute" : [ "mobile" ],
+            "is.mandatory.in.ldap" : [ "false" ],
+            "attribute.force.default" : [ "true" ],
+            "is.binary.attribute" : [ "false" ],
+            "read.only" : [ "true" ],
+            "always.read.value.from.ldap" : [ "false" ],
+            "user.model.attribute" : [ "mobile" ]
+          }
+        }, {
+          "id" : "4340a139-87eb-4228-83ae-23705aa509af",
+          "name" : "fullname",
+          "providerId" : "user-attribute-ldap-mapper",
+          "subComponents" : { },
+          "config" : {
+            "ldap.attribute" : [ "displayName" ],
+            "attribute.force.default" : [ "true" ],
+            "is.mandatory.in.ldap" : [ "false" ],
+            "is.binary.attribute" : [ "false" ],
+            "read.only" : [ "true" ],
+            "always.read.value.from.ldap" : [ "false" ],
+            "user.model.attribute" : [ "fullname" ]
+          }
+        }, {
+          "id" : "1c675675-322c-4591-9141-8cc4bc26fa4e",
+          "name" : "creation date",
+          "providerId" : "user-attribute-ldap-mapper",
+          "subComponents" : { },
+          "config" : {
+            "ldap.attribute" : [ "createTimestamp" ],
+            "is.mandatory.in.ldap" : [ "false" ],
+            "always.read.value.from.ldap" : [ "true" ],
+            "read.only" : [ "true" ],
+            "user.model.attribute" : [ "createTimestamp" ]
+          }
+        }, {
           "id" : "735cb58d-630f-4adf-ab3d-92ff9da8d1ba",
           "name" : "modify date",
           "providerId" : "user-attribute-ldap-mapper",
@@ -1754,8 +1807,8 @@
           "config" : {
             "ldap.attribute" : [ "modifyTimestamp" ],
             "is.mandatory.in.ldap" : [ "false" ],
-            "read.only" : [ "true" ],
             "always.read.value.from.ldap" : [ "true" ],
+            "read.only" : [ "true" ],
             "user.model.attribute" : [ "modifyTimestamp" ]
           }
         }, {
@@ -1765,8 +1818,8 @@
           "subComponents" : { },
           "config" : {
             "ldap.attribute" : [ "l" ],
-            "attribute.force.default" : [ "true" ],
             "is.mandatory.in.ldap" : [ "false" ],
+            "attribute.force.default" : [ "true" ],
             "is.binary.attribute" : [ "false" ],
             "read.only" : [ "true" ],
             "always.read.value.from.ldap" : [ "false" ],
@@ -1784,15 +1837,15 @@
         "useKerberosForPasswordAuthentication" : [ "false" ],
         "importEnabled" : [ "true" ],
         "enabled" : [ "true" ],
-        "bindDn" : [ "cn=admin,dc=plone,dc=org" ],
-        "changedSyncPeriod" : [ "-1" ],
         "bindCredential" : [ "n0m0res3crets" ],
         "usernameLDAPAttribute" : [ "uid" ],
-        "lastSync" : [ "1754928634" ],
+        "bindDn" : [ "cn=admin,dc=plone,dc=org" ],
+        "changedSyncPeriod" : [ "-1" ],
+        "lastSync" : [ "1755098437" ],
         "vendor" : [ "other" ],
         "uuidLDAPAttribute" : [ "entryUUID" ],
-        "allowKerberosAuthentication" : [ "false" ],
         "connectionUrl" : [ " ldap://ldap" ],
+        "allowKerberosAuthentication" : [ "false" ],
         "syncRegistrations" : [ "false" ],
         "authType" : [ "simple" ],
         "searchScope" : [ "2" ],
@@ -1810,10 +1863,21 @@
       "providerId" : "declarative-user-profile",
       "subComponents" : { },
       "config" : {
-        "kc.user.profile.config" : [ "{\"attributes\":[{\"name\":\"username\",\"displayName\":\"${username}\",\"validations\":{\"length\":{\"min\":3,\"max\":255},\"username-prohibited-characters\":{},\"up-username-not-idn-homograph\":{}},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\",\"user\"]},\"multivalued\":false},{\"name\":\"email\",\"displayName\":\"${email}\",\"validations\":{\"email\":{},\"length\":{\"max\":255}},\"required\":{\"roles\":[\"user\"]},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\",\"user\"]},\"multivalued\":false},{\"name\":\"firstName\",\"displayName\":\"${firstName}\",\"validations\":{\"length\":{\"max\":255},\"person-name-prohibited-characters\":{}},\"required\":{\"roles\":[\"user\"]},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\",\"user\"]},\"multivalued\":false},{\"name\":\"lastName\",\"displayName\":\"${lastName}\",\"validations\":{\"length\":{\"max\":255},\"person-name-prohibited-characters\":{}},\"required\":{\"roles\":[\"user\"]},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\",\"user\"]},\"multivalued\":false},{\"name\":\"location\",\"displayName\":\"Location\",\"validations\":{},\"annotations\":{},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\"]},\"multivalued\":false}],\"groups\":[{\"name\":\"user-metadata\",\"displayHeader\":\"User metadata\",\"displayDescription\":\"Attributes, which refer to user metadata\"}],\"unmanagedAttributePolicy\":\"ENABLED\"}" ]
+        "kc.user.profile.config" : [ "{\"attributes\":[{\"name\":\"username\",\"displayName\":\"${username}\",\"validations\":{\"length\":{\"min\":3,\"max\":255},\"username-prohibited-characters\":{},\"up-username-not-idn-homograph\":{}},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\",\"user\"]},\"multivalued\":false},{\"name\":\"email\",\"displayName\":\"${email}\",\"validations\":{\"email\":{},\"length\":{\"max\":255}},\"required\":{\"roles\":[\"user\"]},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\",\"user\"]},\"multivalued\":false},{\"name\":\"firstName\",\"displayName\":\"${firstName}\",\"validations\":{\"length\":{\"max\":255},\"person-name-prohibited-characters\":{}},\"required\":{\"roles\":[\"user\"]},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\",\"user\"]},\"multivalued\":false},{\"name\":\"lastName\",\"displayName\":\"${lastName}\",\"validations\":{\"length\":{\"max\":255},\"person-name-prohibited-characters\":{}},\"required\":{\"roles\":[\"user\"]},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\",\"user\"]},\"multivalued\":false},{\"name\":\"location\",\"displayName\":\"Location\",\"validations\":{},\"annotations\":{},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\"]},\"multivalued\":false},{\"name\":\"fullname\",\"displayName\":\"Fullname\",\"validations\":{},\"annotations\":{},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\"]},\"multivalued\":false},{\"name\":\"phone\",\"displayName\":\"phone\",\"validations\":{},\"annotations\":{},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\"]},\"group\":\"user-metadata\",\"multivalued\":false},{\"name\":\"mobile\",\"displayName\":\"mobile\",\"validations\":{},\"annotations\":{},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\"]},\"group\":\"user-metadata\",\"multivalued\":false}],\"groups\":[{\"name\":\"user-metadata\",\"displayHeader\":\"User metadata\",\"displayDescription\":\"Attributes, which refer to user metadata\"}],\"unmanagedAttributePolicy\":\"ENABLED\"}" ]
       }
     } ],
     "org.keycloak.keys.KeyProvider" : [ {
+      "id" : "e0d22c80-9796-4d7e-bba6-e31f8d72f7c1",
+      "name" : "hmac-generated-hs512",
+      "providerId" : "hmac-generated",
+      "subComponents" : { },
+      "config" : {
+        "kid" : [ "e0bff9df-f2b8-4e1e-8373-84759e622e90" ],
+        "secret" : [ "BHLa3Mw83kcaS8tOfIGdm7s5VGxxRSahQqiEkFJJ_ObMNLS2TY3kLTE9pxGWJiSpiEe58qnpTZ1_6JsaCWrqjTeJRVa_dJgJm8-mduoDtt8t2BRFq2LX6nYv9xhxTKacCtBiWsG7rhXx7wUZ9xruaRuNCeG-8KualMt76xJMpY4" ],
+        "priority" : [ "100" ],
+        "algorithm" : [ "HS512" ]
+      }
+    }, {
       "id" : "a7f370c1-e6f4-4bd8-b427-51695bbf01d5",
       "name" : "hmac-generated",
       "providerId" : "hmac-generated",
@@ -1843,17 +1907,6 @@
         "privateKey" : [ "MIIEpQIBAAKCAQEArkImmSbvgXOel7MjkDkmaXE7R0sFAAoif82u7i0v5+PnY7EE9EOU26zJX2nvHI+m3TvS6/89/AgNRSXMcf368htBV82H34mb8V5PAaxfAaXNiTAfvWc0n3iaRcTaJAaNRHvFfaG2HUApnZkIMh0CWLPHezUR0bOYTliss+7ia0U0RkLfJqslR+S7Yc8MeUKC9EZKC76Pn0JyBIEtMsjBoI86YwtRcY7pcwtwmfOMWm4Ysj5qE10xjGmT5bBFVuRJbT1bCj++NTsfVVpayNSlCjb08GFC5/bohs7vEvvRVWfJfj/d3qWBWV6ZBKxc5lFvV4oaS5JmOAusqRF+haTetwIDAQABAoIBABJOhsmOKpk58U5UlobfSibHq4eY3QSdC/TLQfZprt+4tKVngnK66teNNnacpW8ltE0HrOf4H6XrnqFGEE1ldkibDmlQAVc9mLFpy/kMB8sfhRFFigAW6JNcUzDDNnuUaKDqM9w38e7uv7B71D2XiJiTAoDyGVYjfPu2GyaoEQddyG+iKRwFVFtIohbv2isOmD/kXhUwiZMR8NFi/7FuUJXtOfdxIJFQlMFTlOSUDXHysrmv8/AzMxgX5mTfwsKMLFWlwRK1joQ5OLOfWuvX/H7yfzPxTcIgLsAiN+zhIaYEY7ZK+ajA68k34VMDUruC3lM45lFQfPJzTKq7qZtpWKkCgYEA25smAFK4dQfF311mxCnQLe3zTt1D7t8GFQMvUR4lD2QDu09wHLRXcdmqKv3SfS/qnd1Oykat2E2iDllEQj7bN0880k67c9sFeVzedPVsrp57uh/uG4e8n7+B2MwmuYf5YdSm0m9/5GtVGY0CT7fqxcl5QtzYmL+BOLDeR8ASjNsCgYEAyyMdcA4fOARxgHQH3Wom/UsprC+IxBaz3w59NhU763z9ISEZlpYh76CBpkch6d9J3AMN1ISx5zvEkO9IqlQM1J/W3Phl3e/gw5LTVIwYC5R7wQakiwIooJdf0x8xqEAGkJyrhqqUbu4ftnbI9Z0lCqvztS3/qI0X7V5T2OvCblUCgYEAnCn8IAay/SYF5Az7Y0uIquCnQNG/2UHnhVG6eCjDmeo5bR3UT9U+yctLYz8US8mjQZd6zATu4v5x21pHXARuxyolyjgKvRxnDCKqXumX26T/vx+tpw4jaEY7A/xJHW5APP2Hk+WOQNTCs2S+3Amhff0DqjR6IkUsky/TIZrIljkCgYEAvUwr0pBWZ008uAdojNyvGLtCSkLBoHnHhMVryUpgXEJNYOIHhlzBoxxftSP0Zoy9t1jhOnmtj14S/zz86j0I99s7zw9rXjZ7rcTVSqSCg8gKywX1r9SDJ6PomEUpcTC47WoSLZwoVndw9ggbnUajjh5PLTeAVwGkmn6chDivJ0ECgYEAiTakwuZvSZRLd01BP4HFFeIWFuKabpRJ0Nfyx+GieE9hsyISXqCp1kH1h42B92O4fC8Ob34KPtwD5oqkKRJQ9r/Qrd88/VR/3OmVc99F+5aTT/wbA+/GCu4DSXrptgfTHLGUQAt0R6oYb5xLRBgZimP58kVy8OOwTHzdxI9XbSs=" ],
         "certificate" : [ "MIICmTCCAYECBgGWgj5JqzANBgkqhkiG9w0BAQsFADAQMQ4wDAYDVQQDDAVwbG9uZTAeFw0yNTA0MjkxNTQ5MDJaFw0zNTA0MjkxNTUwNDJaMBAxDjAMBgNVBAMMBXBsb25lMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArkImmSbvgXOel7MjkDkmaXE7R0sFAAoif82u7i0v5+PnY7EE9EOU26zJX2nvHI+m3TvS6/89/AgNRSXMcf368htBV82H34mb8V5PAaxfAaXNiTAfvWc0n3iaRcTaJAaNRHvFfaG2HUApnZkIMh0CWLPHezUR0bOYTliss+7ia0U0RkLfJqslR+S7Yc8MeUKC9EZKC76Pn0JyBIEtMsjBoI86YwtRcY7pcwtwmfOMWm4Ysj5qE10xjGmT5bBFVuRJbT1bCj++NTsfVVpayNSlCjb08GFC5/bohs7vEvvRVWfJfj/d3qWBWV6ZBKxc5lFvV4oaS5JmOAusqRF+haTetwIDAQABMA0GCSqGSIb3DQEBCwUAA4IBAQBMdwBcSgJDoYSQC3q+b+uD0cm7TayeYezU9YSq8o56yUY+J+u3jx/NzjpwtAp2bImay3Z3FwnuIzmOAugeIU384vNkHIGqQCMAwwN7xDToILGQ7goUNQ1OXJI/NS9bUbCrSUm0MdnV5M2nGTzw8YByf6OO5NC3G+s/JaiYiPg+ekKQiJ8atnw32pkOk/IPvN0NPPeomWPS1Wa1p+9zHRmhTAYWn/z3+5y2d4LIqw9I/RcvpjIE7i9V1Ytx+RNQOYOiAckBWi6j0nwtIFSb0l74bpY0HuWL3IkBnhrQeR6gZRItKFLiMyKlvcuEM8oFlkdzlTfFy5Thx+kLMKI5/elJ" ],
         "priority" : [ "100" ]
-      }
-    }, {
-      "id" : "e0d22c80-9796-4d7e-bba6-e31f8d72f7c1",
-      "name" : "hmac-generated-hs512",
-      "providerId" : "hmac-generated",
-      "subComponents" : { },
-      "config" : {
-        "kid" : [ "e0bff9df-f2b8-4e1e-8373-84759e622e90" ],
-        "secret" : [ "BHLa3Mw83kcaS8tOfIGdm7s5VGxxRSahQqiEkFJJ_ObMNLS2TY3kLTE9pxGWJiSpiEe58qnpTZ1_6JsaCWrqjTeJRVa_dJgJm8-mduoDtt8t2BRFq2LX6nYv9xhxTKacCtBiWsG7rhXx7wUZ9xruaRuNCeG-8KualMt76xJMpY4" ],
-        "priority" : [ "100" ],
-        "algorithm" : [ "HS512" ]
       }
     }, {
       "id" : "55622799-f899-49a2-ab46-2ac66098bfa1",

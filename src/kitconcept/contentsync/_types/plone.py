@@ -9,7 +9,7 @@ PloneItem = TypedDict(
     {
         "@id": str,
         "@type": str,
-        "UID": str,
+        "UID": NotRequired[str],
         "id": str,
         "title": NotRequired[str],
         "description": NotRequired[str],

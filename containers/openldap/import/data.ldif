@@ -20,8 +20,11 @@ cn: ericof
 givenName: Erico
 sn: Andrei
 uid: ericof
+displayName: Erico Andrei
 mail: ericof@plone.org
 l: Brasilia, DF, Brasil
+mobile: +551199992323
+telephoneNumber: +551132232323
 userPassword: plone123
 
 # LDIF file to Create user "dtremea" in "ou=users" under "dc=plone,dc=org"
@@ -33,9 +36,12 @@ objectClass: inetOrgPerson
 cn: dtremea
 givenName: Dorneles
 sn: Tremea
+displayName: Dorneles Tremea
 uid: dtremea
 mail: dtremea@plone.org
 l: Garibaldi, Rio Grande do Sul, Brazil
+mobile: +555199992323
+telephoneNumber: +555132232323
 userPassword: #Int3rRul3z
 
 # LDIF file to Create user "janedoe" in "ou=users" under "dc=plone,dc=org"
@@ -47,6 +53,7 @@ objectClass: inetOrgPerson
 cn: janedoe
 givenName: Jane
 sn: Doe
+displayName: Jane Doe
 uid: janedoe
 mail: janedoe@example.com
 l: Springfield, NH, USA

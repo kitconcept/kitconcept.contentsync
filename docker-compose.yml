@@ -55,15 +55,17 @@ services:
       POSTGRES_HOST: postgres
 
   ldap:
-    image: osixia/openldap:${OPENLDAP_VERSION:-1.5.0}
+    build:
+      context: containers/openldap
+      args:
+        OPENLDAP_VERSION: ${OPENLDAP_VERSION:-1.5.0}
     environment:
         - "LDAP_ORGANISATION=ploneorg"
         - "LDAP_DOMAIN=plone.org"
         - "LDAP_BASE_DN=dc=plone,dc=org"
         - "LDAP_ADMIN_PASSWORD=n0m0res3crets"
         - "LDAP_SEED_INTERNAL_LDIF_PATH=/data/import/data.ldif"
+        - "LDAP_REMOVE_CONFIG_AFTER_SETUP=false"
     ports:
         - 389:389
         - 636:636
-    volumes:
-      - ./containers/openldap/import:/data/import

@@ -12,27 +12,31 @@ def plone_client(plone_config) -> Generator[PloneClient, None, None]:
 
 
 @pytest.fixture(scope="module")
-def populate_portal(plone_client) -> None:
+def populate_portal(plone_client) -> Generator[None, None, None]:
+    plone_client.authenticate()
     # Create a Document at the root of the portal
     content = plone_client.create_content(
         "/",
         {
+            "@id": "/reports",
             "@type": "Document",
             "id": "reports",
             "title": "Reports",
         },
     )
     if content:
-        parent_id = content["id"]
         for idx in range(1, 99):
-            plone_client.create_content(
-                f"/{parent_id}",
+            obj_id = f"report-{idx}"
+            plone_client.create_or_update_content(
                 {
+                    "@id": f"/reports/{obj_id}",
                     "@type": "Document",
-                    "id": f"report-{idx}",
+                    "id": obj_id,
                     "title": f"Report {idx}",
                 },
             )
+    yield
+    content = plone_client.delete_content("/reports")
 
 
 @pytest.fixture(scope="module")
@@ -103,3 +107,20 @@ def test_client_content_lifecycle(plone_client, person_payload):
     with pytest.raises(requests.HTTPError) as excinfo:
         plone_client.get_content(person_path)
     assert excinfo.value.response.status_code == 404
+
+
+def test_client_search_content(plone_client, populate_portal):
+    params = {"portal_type": "Document"}
+    search_results = plone_client.search_content("/reports", params)
+    assert isinstance(search_results, dict)
+    assert search_results["items_total"] == 99
+    assert "batching" in search_results
+    assert len(search_results["items"]) == 25
+
+
+def test_client_search_content_expand(plone_client, populate_portal):
+    params = {"portal_type": "Document"}
+    search_results = plone_client.search_content("/reports", params, expand_batch=True)
+    assert isinstance(search_results, dict)
+    assert search_results["items_total"] == len(search_results["items"])
+    assert "batching" not in search_results

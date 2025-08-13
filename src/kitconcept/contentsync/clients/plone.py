@@ -53,14 +53,27 @@ class PloneClient(ConnectionClient):
         """Build full URL for API endpoint"""
         return urljoin(self.api_url, endpoint)
 
-    def _make_request(self, method: str, endpoint: str, **kwargs) -> requests.Response:
+    def _relative_url(self, url: str) -> str:
+        """Process the URL for API requests."""
+        return url.replace(self.site_url, "").lstrip("/")
+
+    def _batching_next_url(self, data: dict[str, str]) -> str | None:
+        """Get the next URL for batching requests."""
+        if url := data.get("next"):
+            return self._relative_url(url)
+        return None
+
+    def _make_request(
+        self, method: str, endpoint: str, raise_for_status: bool = True, **kwargs
+    ) -> requests.Response:
         """Make HTTP request with error handling"""
         endpoint = endpoint.lstrip("/")
 
         url = self._get_url(endpoint)
         try:
             response = self.session.request(method, url, **kwargs)
-            response.raise_for_status()
+            if raise_for_status:
+                response.raise_for_status()
             return response
         except requests.HTTPError:
             body = response.json()
@@ -70,10 +83,14 @@ class PloneClient(ConnectionClient):
             logger.error(f"Request failed: {method} {url} - {e}")
             raise
 
-    def get_content(self, path: str, params: dict | None = None) -> t.PloneItem | None:
+    def get_content(
+        self, path: str, params: dict | None = None, raise_for_status: bool = True
+    ) -> t.PloneItem | None:
         """Retrieve content item from Plone."""
         params = params or {}
-        response = self._make_request("GET", path, params=params)
+        response = self._make_request(
+            "GET", path, raise_for_status=raise_for_status, params=params
+        )
         if response.status_code == 200:
             return response.json()
         return None
@@ -113,7 +130,7 @@ class PloneClient(ConnectionClient):
         path = payload.get("@id")
         if not path:
             raise ValueError("Content item must have an '@id' field.")
-        if self.get_content(path):
+        if self.get_content(path, raise_for_status=False):
             # Should update
             status = self.update_content(path, payload)
             return self.get_content(path) if status else None
@@ -148,14 +165,30 @@ class PloneClient(ConnectionClient):
         logger.error(f"Failed to transition content at {path}: {response.status_code}")
         return False
 
-    def search_content(self, path: str, params: dict) -> dict:
+    def search_content(
+        self, path: str, params: dict, expand_batch: bool = False
+    ) -> dict:
         """Search for content item in Plone."""
         endpoint = f"{path}/@search"
         response = self._make_request("GET", endpoint, params=params)
-        if response.status_code == 200:
-            return response.json()
-        logger.error(f"Failed to search content at {endpoint}: {response.status_code}")
-        return {}
+        if response.status_code != 200:
+            logger.error(
+                f"Failed to search content at {endpoint}: {response.status_code}"
+            )
+            return {}
+        result = response.json()
+        if expand_batch and (batching := result.pop("batching", None)):
+            while batching:
+                next_url = self._batching_next_url(batching)
+                if not next_url:
+                    batching = None
+                    break
+                response = self._make_request("GET", next_url)
+                data = response.json()
+                items = data.get("items", [])
+                result["items"].extend(items)
+                batching = data.pop("batching", None)
+        return result
 
     def __repr__(self) -> str:
         """Return a string representation of the KeycloakClient."""

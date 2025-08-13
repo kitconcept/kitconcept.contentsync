@@ -1,3 +1,4 @@
+from kitconcept.contentsync.commands.dump import app as app_dumper
 from kitconcept.contentsync.commands.info import app as app_info
 from kitconcept.contentsync.commands.sync import app as app_sync
 
@@ -13,6 +14,7 @@ def main(ctx: typer.Context):
     pass
 
 
+app.add_typer(app_dumper)
 app.add_typer(app_info)
 app.add_typer(app_sync)
 

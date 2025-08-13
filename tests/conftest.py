@@ -6,6 +6,12 @@ import pytest
 import requests
 
 
+@pytest.fixture(autouse=True)
+def test_dir(monkeypatch, tmp_path) -> Path:
+    monkeypatch.chdir(tmp_path)
+    return tmp_path
+
+
 def is_responsive(url: str, accepted_codes: tuple[int, ...] = (200,)) -> bool:
     try:
         response = requests.get(url, timeout=5)

@@ -1,16 +1,8 @@
 from kitconcept.contentsync.cli import app
 from typer.testing import CliRunner
 
-import pytest
-
 
 runner = CliRunner()
-
-
-@pytest.fixture(scope="module", autouse=True)
-def start_containers(keycloak_config, plone_config):
-    """Start containers."""
-    yield
 
 
 def test_cli_sync(start_containers):
