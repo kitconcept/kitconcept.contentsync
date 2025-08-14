@@ -26,6 +26,7 @@ class PloneClient(ConnectionClient):
         config = self._config
         self.api_url = config.api_url
         self.site_url = config.site_url
+        self.base_folder = config.base_folder
         self.session = requests.Session()
         if config.basic_auth:
             self.session.auth = HTTPBasicAuth(
