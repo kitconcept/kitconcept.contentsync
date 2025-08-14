@@ -1,7 +1,6 @@
 from kitconcept.contentsync import _types as t
 from kitconcept.contentsync.clients.keycloak import KeycloakClient
 from kitconcept.contentsync.clients.plone import PloneClient
-from kitconcept.contentsync.converter.keycloak import KeycloakPersonConverter
 from kitconcept.contentsync.sync import ContentSyncer
 from kitconcept.contentsync.utils import relative_path
 
@@ -9,14 +8,6 @@ from kitconcept.contentsync.utils import relative_path
 class PersonSyncer(ContentSyncer):
     src_client: KeycloakClient
     dst_client: PloneClient
-    item_converter: KeycloakPersonConverter
-
-    def __init__(
-        self, src_client: KeycloakClient, dst_client: PloneClient, base_dst_folder: str
-    ):
-        super().__init__(src_client, dst_client, base_dst_folder)
-        converter = KeycloakPersonConverter(base_path=base_dst_folder)
-        self.converter = converter
 
     def get_src_items(
         self, transform: bool = True

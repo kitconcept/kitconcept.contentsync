@@ -1,25 +1,26 @@
 from kitconcept.contentsync import _types as t
 from kitconcept.contentsync.clients.keycloak import KeycloakClient
 from kitconcept.contentsync.clients.plone import PloneClient
-from kitconcept.contentsync.converter import ItemConverter
+from kitconcept.contentsync.converters import ItemConverter
 
 
 class ContentSyncer:
     src_client: KeycloakClient | PloneClient
     dst_client: PloneClient
     dst_site_url: str
-    item_converter: ItemConverter
+    converter: ItemConverter
 
     def __init__(
         self,
+        item_converter: type[ItemConverter],
         src_client: KeycloakClient | PloneClient,
         dst_client: PloneClient,
         base_dst_folder: str,
     ):
         self.src_client = src_client
         self.dst_client = dst_client
+        self.converter = item_converter(base_path=base_dst_folder)
         self.dst_site_url = dst_client.site_url
-        self.item_converter = ItemConverter(base_path=base_dst_folder)
 
     def get_src_items(self, transform: bool = True) -> dict[str, dict]:
         """Retrieve items from the source client."""

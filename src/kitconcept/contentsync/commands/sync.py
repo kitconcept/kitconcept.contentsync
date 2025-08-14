@@ -13,6 +13,7 @@ def sync_contents():
     settings = get_settings()
     typer.echo(f"Syncing contents from {settings.src} to {settings.dst}")
     syncer: ContentSyncer = settings.sync(
+        item_converter=settings.item_converter,
         src_client=settings.src,
         dst_client=settings.dst,
         base_dst_folder=settings.base_dst_folder,

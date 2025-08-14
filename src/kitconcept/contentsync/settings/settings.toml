@@ -1,6 +1,8 @@
 debug = false
+
+[sync]
 klass = "kitconcept.contentsync.sync.person.PersonSyncer"
-base_dst_folder = "/"
+item_converter = "kitconcept.contentsync.converters.keycloak.KeycloakPersonConverter"
 
 [src]
 type="keycloak"
@@ -14,5 +16,6 @@ verify=false
 type="plone"
 site_url="http://localhost:8080/Plone"
 api_url="http://localhost:8080/Plone/++api++"
+base_folder = "/"
 username="admin"
 password="admin"

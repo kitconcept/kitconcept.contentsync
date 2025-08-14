@@ -1,4 +1,4 @@
-from kitconcept.contentsync.converter import keycloak as converter
+from kitconcept.contentsync.converters import keycloak as converter
 
 import pytest
 
@@ -12,7 +12,8 @@ import pytest
         ("first_name", "Dorneles"),
         ("last_name", "Tremea"),
         ("title", "Tremea, Dorneles"),
-        ("email", "dtremea@plone.org"),
+        ("contact_email", "dtremea@plone.org"),
+        ("contact_phone", "+555132232323"),
         ("location", "Garibaldi, Rio Grande do Sul, Brazil"),
         ("_transition", "publish"),
     ],

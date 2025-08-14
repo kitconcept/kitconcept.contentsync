@@ -23,6 +23,7 @@ class PloneConfig(ClientConfig):
     __name__ = "plone"
     site_url: str = ""
     api_url: str = ""
+    base_folder: str = "/"
     basic_auth: BasicAuth | None = None
     username: str | None = None
     password: str | None = None

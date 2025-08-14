@@ -1,7 +1,7 @@
 from collective.html2blocks._types import VoltoBlocksInfo
 from collective.html2blocks.converter import volto_blocks
 from kitconcept.contentsync import _types as t
-from kitconcept.contentsync.converter import ItemConverter
+from kitconcept.contentsync.converters import ItemConverter
 
 
 class KeycloakPersonConverter(ItemConverter):
@@ -13,7 +13,7 @@ class KeycloakPersonConverter(ItemConverter):
         ("id", "username"),
         ("first_name", "firstName"),
         ("last_name", "lastName"),
-        ("email", "email"),
+        ("contact_email", "email"),
     )
 
     def _field__transition(self, src: t.KeycloakUser) -> str:
@@ -31,6 +31,12 @@ class KeycloakPersonConverter(ItemConverter):
         first_name = src.get("firstName", "")
         last_name = src.get("lastName", "")
         return f"{last_name}, {first_name}"
+
+    def _field_contact_phone(self, src: t.KeycloakUser) -> str:
+        """Constructs the title from the first and last name."""
+        attrs = src.get("attributes", {}) or {}
+        phone = attrs.get("phone", [""])[0]
+        return phone
 
     def _blocks_factory_(self, src: t.KeycloakUser) -> VoltoBlocksInfo:
         """Constructs the blocks for the user."""

@@ -19,6 +19,7 @@ class PloneClient(ConnectionClient):
     site_url: str
     api_url: str
     is_authenticated: bool = False
+    base_folder: str = "/"
 
     def _init_client(self):
         """Initialize HTTP session with authentication and headers"""
