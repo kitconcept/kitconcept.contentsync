@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1.9
-FROM ubuntu:noble AS base
+FROM ubuntu:plucky AS base
 
 ARG PYTHON_VERSION=3.13
 
@@ -44,7 +44,7 @@ RUN --mount=type=cache,target=/root/.cache \
         --no-group test \
         --no-editable
 
-FROM ubuntu:noble
+FROM ubuntu:plucky
 
 ARG PYTHON_VERSION=3.13
 
