@@ -43,14 +43,28 @@ class KeycloakClient(ConnectionClient):
             return False
         return bool(users)
 
+    def get_users_count(self, query: dict | None = None) -> int:
+        """Get the total count of users in Keycloak."""
+        query = self._prepare_query(query)
+        try:
+            return self._client.users_count(query)
+        except KeycloakGetError as e:
+            logger.error(f"Failed to retrieve users count: {e}")
+            return 0
+
     def get_users(self, query: dict | None = None) -> list[t.KeycloakUser]:
         """Query keycloak for users and return user information."""
         query = self._prepare_query(query)
+        total = self.get_users_count(query)
+        if "max" not in query:
+            query["max"] = total
         try:
             users = self._client.get_users(query)
         except KeycloakGetError as e:
             logger.error(f"Failed to retrieve users: {e}")
             users = []
+        if len(users) < total:
+            logger.error(f"Failed to retrieve users all users: {len(users)} of {total}")
         return users
 
     def get_groups(self, query: dict | None = None) -> list[t.KeycloakGroup]:
