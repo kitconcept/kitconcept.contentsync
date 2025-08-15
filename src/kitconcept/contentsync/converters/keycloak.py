@@ -36,7 +36,8 @@ class KeycloakPersonConverter(ItemConverter):
         """Constructs the title from the first and last name."""
         attrs = src.get("attributes", {}) or {}
         phone = attrs.get("phone", [""])[0]
-        return phone
+        mobile = attrs.get("mobile", [""])[0]
+        return phone or mobile
 
     def _blocks_factory_(self, src: t.KeycloakUser) -> VoltoBlocksInfo:
         """Constructs the blocks for the user."""
@@ -47,6 +48,7 @@ class KeycloakPersonConverter(ItemConverter):
         html = f"""
         <ul>
             <li><strong>Username:</strong> {src["username"]}</li>
+            <li><strong>Display Name:</strong> {self._field_title(src)}</li>
             <li><strong>Company:</strong> {company}</li>
             <li><strong>Department:</strong> {department}</li>
             <li><strong>Location:</strong> {location}</li>
