@@ -10,8 +10,12 @@ class ConnectionClient:
         self._init_client()
 
     def _init_client(self):
-        """Initialize client with configuration"""
+        """Initialize client with configuration."""
         pass
+
+    def test_connection(self) -> bool:
+        """Test the client connection to the remote system."""
+        return False
 
 
 def get_client(type_: str, raw_settings: dict) -> ConnectionClient:

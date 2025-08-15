@@ -13,6 +13,13 @@ class KeycloakClient(ConnectionClient):
     _client: KeycloakAdmin
     _config: t.KeycloakConfig
 
+    def _prepare_query(self, query: dict | None = None) -> dict:
+        """Prepare the query parameters for Keycloak API requests."""
+        query = query if query else {}
+        if "briefRepresentation" not in query:
+            query["briefRepresentation"] = False
+        return query
+
     def _init_client(self):
         """Initialize Keycloak client with configuration"""
         config = self._config
@@ -26,8 +33,19 @@ class KeycloakClient(ConnectionClient):
         self._connection = KeycloakOpenIDConnection(**settings)
         self._client = KeycloakAdmin(connection=self._connection)
 
+    def test_connection(self) -> bool:
+        """Test the connection to Keycloak."""
+        client = self._client
+        try:
+            users = client.users_count()
+        except Exception as e:
+            logger.error(f"Failed to test connection: {e}")
+            return False
+        return bool(users)
+
     def get_users(self, query: dict | None = None) -> list[t.KeycloakUser]:
         """Query keycloak for users and return user information."""
+        query = self._prepare_query(query)
         try:
             users = self._client.get_users(query)
         except KeycloakGetError as e:
@@ -37,9 +55,7 @@ class KeycloakClient(ConnectionClient):
 
     def get_groups(self, query: dict | None = None) -> list[t.KeycloakGroup]:
         """Query keycloak for groups and return group information."""
-        query = query if query else {}
-        if "briefRepresentation" not in query:
-            query["briefRepresentation"] = False
+        query = self._prepare_query(query)
         client = self._client
         groups_info = client.get_groups(query=query)
         return groups_info

@@ -33,10 +33,19 @@ class PloneClient(ConnectionClient):
                 config.basic_auth["username"],
                 config.basic_auth["password"],
             )
-        self.session.headers.update({
-            "Accept": "application/json",
-            "Content-Type": "application/json",
-        })
+        self.session.headers.update(
+            {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+            }
+        )
+
+    def test_connection(self) -> bool:
+        """Test the connection to the Plone."""
+        try:
+            return self.get_content("/") is not None
+        except requests.HTTPError:
+            return False
 
     def authenticate(self):
         """Authenticate user with Plone REST API"""
@@ -48,11 +57,15 @@ class PloneClient(ConnectionClient):
         response = self.session.post(url, json=data)
         response.raise_for_status()
         token = response.json().get("token")
-        self.session.headers.update({"Authorization": f"Bearer {token}"})
-        self.is_authenticated = True
+        if token:
+            self.session.headers.update({"Authorization": f"Bearer {token}"})
+            self.is_authenticated = True
+        else:
+            raise RuntimeError("Authentication failed, no token received.")
 
     def _get_url(self, endpoint: str) -> str:
         """Build full URL for API endpoint"""
+        endpoint = endpoint.lstrip("/")
         return urljoin(self.api_url, endpoint)
 
     def _relative_url(self, url: str) -> str:
@@ -69,8 +82,6 @@ class PloneClient(ConnectionClient):
         self, method: str, endpoint: str, raise_for_status: bool = True, **kwargs
     ) -> requests.Response:
         """Make HTTP request with error handling"""
-        endpoint = endpoint.lstrip("/")
-
         url = self._get_url(endpoint)
         try:
             response = self.session.request(method, url, **kwargs)
