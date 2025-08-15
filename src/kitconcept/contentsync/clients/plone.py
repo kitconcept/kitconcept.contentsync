@@ -33,12 +33,10 @@ class PloneClient(ConnectionClient):
                 config.basic_auth["username"],
                 config.basic_auth["password"],
             )
-        self.session.headers.update(
-            {
-                "Accept": "application/json",
-                "Content-Type": "application/json",
-            }
-        )
+        self.session.headers.update({
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+        })
 
     def test_connection(self) -> bool:
         """Test the connection to the Plone."""
