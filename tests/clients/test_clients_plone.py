@@ -70,6 +70,20 @@ def test_client_initialization(plone_config, attr, expected_type):
     assert isinstance(getattr(client, attr), expected_type)
 
 
+@pytest.mark.parametrize(
+    "endpoint,expected",
+    [
+        ("//@login", "http://127.0.0.1:8080/Plone/++api++/@login"),
+        ("/@login", "http://127.0.0.1:8080/Plone/++api++/@login"),
+        ("@login", "http://127.0.0.1:8080/Plone/++api++/@login"),
+        ("foo-bar", "http://127.0.0.1:8080/Plone/++api++/foo-bar"),
+    ],
+)
+def test_client__get_url(plone_client, endpoint, expected):
+    url = plone_client._get_url(endpoint)
+    assert url == expected
+
+
 def test_client_content_lifecycle(plone_client, person_payload):
     # Authenticate
     plone_client.authenticate()

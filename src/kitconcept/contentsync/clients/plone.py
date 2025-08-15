@@ -4,7 +4,6 @@ from kitconcept.contentsync.clients import ConnectionClient
 from kitconcept.contentsync.utils import dotted_name_for_object
 from requests.auth import HTTPBasicAuth
 from typing import Any
-from urllib.parse import urljoin
 
 import requests
 
@@ -64,7 +63,7 @@ class PloneClient(ConnectionClient):
     def _get_url(self, endpoint: str) -> str:
         """Build full URL for API endpoint"""
         endpoint = endpoint.lstrip("/")
-        return urljoin(self.api_url, endpoint)
+        return f"{self.api_url}/{endpoint}"
 
     def _relative_url(self, url: str) -> str:
         """Process the URL for API requests."""
