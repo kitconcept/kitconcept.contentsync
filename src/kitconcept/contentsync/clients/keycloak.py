@@ -26,19 +26,22 @@ class KeycloakClient(ConnectionClient):
         self._connection = KeycloakOpenIDConnection(**settings)
         self._client = KeycloakAdmin(connection=self._connection)
 
-    def get_all_users(self) -> list[t.KeycloakUser]:
-        """Retrieve all users from Keycloak"""
+    def get_users(self, query: dict | None = None) -> list[t.KeycloakUser]:
+        """Query keycloak for users and return user information."""
         try:
-            users = self._client.get_users()
+            users = self._client.get_users(query)
         except KeycloakGetError as e:
             logger.error(f"Failed to retrieve users: {e}")
             users = []
         return users
 
-    def get_all_groups(self) -> list[t.KeycloakGroup]:
+    def get_groups(self, query: dict | None = None) -> list[t.KeycloakGroup]:
         """Query keycloak for groups and return group information."""
+        query = query if query else {}
+        if "briefRepresentation" not in query:
+            query["briefRepresentation"] = False
         client = self._client
-        groups_info = client.get_groups({"briefRepresentation": False})
+        groups_info = client.get_groups(query=query)
         return groups_info
 
     def __repr__(self) -> str:

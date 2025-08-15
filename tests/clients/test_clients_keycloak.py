@@ -28,15 +28,15 @@ def test_client_initialization(keycloak_config, attr, expected_type):
     assert isinstance(getattr(client, attr), expected_type)
 
 
-def test_client_get_all_groups(keycloak_client):
-    groups = keycloak_client.get_all_groups()
+def test_client_get_groups(keycloak_client):
+    groups = keycloak_client.get_groups()
     assert groups is not None
     assert isinstance(groups, list)
     assert len(groups) == 3
 
 
-def test_client_get_all_users(keycloak_client):
-    users = keycloak_client.get_all_users()
+def test_client_get_users(keycloak_client):
+    users = keycloak_client.get_users()
     assert users is not None
     assert isinstance(users, list)
     assert len(users) == 4

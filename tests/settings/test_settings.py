@@ -1,15 +1,20 @@
+from collections.abc import Generator
 from kitconcept.contentsync import settings
+from pathlib import Path
 
 import pytest
 
 
 @pytest.fixture
-def local_env(test_dir):
+def local_env(test_dir) -> Generator[Path, None, None]:
     lines = ["SYNC_DEBUG=1", "SYNC_SRC__SERVER_URL=http://sso.localhost"]
-    with open(test_dir / ".env", "w") as f:
+    path = test_dir / ".env"
+    with open(path, "w") as f:
         for line in lines:
             f.write(f"{line}\n")
-    return test_dir
+    yield test_dir
+    # Remove .env file after usage
+    path.unlink(missing_ok=True)
 
 
 def test_get_settings_default(test_dir):

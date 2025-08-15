@@ -10,9 +10,9 @@ class PersonSyncer(ContentSyncer):
     dst_client: PloneClient
 
     def get_src_items(
-        self, transform: bool = True
+        self, query: dict | None = None, transform: bool = True
     ) -> dict[str, t.PlonePerson | t.KeycloakUser]:
-        src_items = self.src_client.get_all_users()
+        src_items = self.src_client.get_users(query=query)
         if not transform:
             return {item["id"]: item for item in src_items}
         converted = [self.converter(item) for item in src_items]

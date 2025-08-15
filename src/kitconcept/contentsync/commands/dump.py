@@ -40,10 +40,14 @@ def dump_contents(
         dst_client=settings.dst,
         base_dst_folder=settings.base_dst_folder,
     )
-    result = syncer.dump_contents(transform=transform)
+    query = {}
     if filter_key:
         key, value = filter_key.split("=", 1)
-        result = {k: v for k, v in result.items() if v.get(key) == value}
+        query[key] = value
+    result = syncer.dump_contents(
+        query=query,
+        transform=transform,
+    )
     with open(dst, "w") as fout:
         json.dump(result, fout, indent=2)
     typer.echo(f"- Contents were dumped successfully to {dst}")
