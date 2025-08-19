@@ -1,4 +1,6 @@
+from copy import deepcopy
 from kitconcept.contentsync import _types as t
+from kitconcept.contentsync import logger
 from typing import cast
 
 
@@ -16,9 +18,16 @@ class ItemConverter:
         attrs = [name for name in dir(self) if name.startswith(prefix)]
         return {name[len(prefix) :]: name for name in attrs}
 
-    def __call__(self, src: dict) -> t.PlonePerson:
+    def __call__(self, src: dict) -> t.PlonePerson | None:
         """Converts a user to a Plone person."""
         person = cast(t.PlonePerson, {"@type": self.portal_type})
+        if not isinstance(src, dict):
+            logger.info(
+                f"Source is not a dictionary ({src}), cannot convert to Plone person."
+            )
+            return None
+        # Avoid modifying the original source dictionary
+        src = deepcopy(src)
         for key, attr in self.base_mapping:
             person[key] = src.get(attr, "")
         for key, meth_name in self._local_transformers().items():

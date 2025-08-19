@@ -16,7 +16,7 @@ class PersonSyncer(ContentSyncer):
         if not transform:
             return {item["id"]: item for item in src_items}
         converted = [self.converter(item) for item in src_items]
-        return {item["@id"]: item for item in converted}
+        return {item["@id"]: item for item in converted if item is not None}
 
     def get_dst_items(self) -> set[str]:
         params = {"portal_type": "Person", "sort_on": "sortable_title"}
