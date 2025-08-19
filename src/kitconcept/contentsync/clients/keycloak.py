@@ -45,7 +45,7 @@ class KeycloakClient(ConnectionClient):
 
     def get_users_count(self, query: dict | None = None) -> int:
         """Get the total count of users in Keycloak."""
-        query = self._prepare_query(query)
+        query = query or {}
         try:
             return self._client.users_count(query)
         except KeycloakGetError as e:

@@ -1,42 +1,7 @@
-from collections.abc import Generator
 from kitconcept.contentsync.clients.plone import PloneClient
 
 import pytest
 import requests
-
-
-@pytest.fixture(scope="module")
-def plone_client(plone_config) -> Generator[PloneClient, None, None]:
-    client = PloneClient(config=plone_config)
-    yield client
-
-
-@pytest.fixture(scope="module")
-def populate_portal(plone_client) -> Generator[None, None, None]:
-    plone_client.authenticate()
-    # Create a Document at the root of the portal
-    content = plone_client.create_content(
-        "/",
-        {
-            "@id": "/reports",
-            "@type": "Document",
-            "id": "reports",
-            "title": "Reports",
-        },
-    )
-    if content:
-        for idx in range(1, 99):
-            obj_id = f"report-{idx}"
-            plone_client.create_or_update_content(
-                {
-                    "@id": f"/reports/{obj_id}",
-                    "@type": "Document",
-                    "id": obj_id,
-                    "title": f"Report {idx}",
-                },
-            )
-    yield
-    content = plone_client.delete_content("/reports")
 
 
 @pytest.fixture(scope="module")
@@ -73,6 +38,14 @@ def test_client_initialization(plone_config, attr, expected_type):
 @pytest.mark.parametrize(
     "endpoint,expected",
     [
+        (
+            "http://127.0.0.1:8080/Plone/@login",
+            "http://127.0.0.1:8080/Plone/++api++/@login",
+        ),
+        (
+            "http://127.0.0.1:8080/Plone/++api++/@login",
+            "http://127.0.0.1:8080/Plone/++api++/@login",
+        ),
         ("//@login", "http://127.0.0.1:8080/Plone/++api++/@login"),
         ("/@login", "http://127.0.0.1:8080/Plone/++api++/@login"),
         ("@login", "http://127.0.0.1:8080/Plone/++api++/@login"),

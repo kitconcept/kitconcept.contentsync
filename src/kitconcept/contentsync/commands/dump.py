@@ -48,6 +48,7 @@ def dump_contents(
         query=query,
         transform=transform,
     )
+    typer.echo(f"- Got {len(result)} entries")
     with open(dst, "w") as fout:
         json.dump(result, fout, indent=2)
     typer.echo(f"- Contents were dumped successfully to {dst}")

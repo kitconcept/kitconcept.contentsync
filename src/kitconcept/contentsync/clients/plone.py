@@ -46,7 +46,7 @@ class PloneClient(ConnectionClient):
 
     def authenticate(self):
         """Authenticate user with Plone REST API"""
-        url = self._get_url("/@login")
+        url = self._get_url("@login")
         data = {
             "login": self._config.username,
             "password": self._config.password,
@@ -60,19 +60,17 @@ class PloneClient(ConnectionClient):
         else:
             raise RuntimeError("Authentication failed, no token received.")
 
-    def _get_url(self, endpoint: str) -> str:
-        """Build full URL for API endpoint"""
-        endpoint = endpoint.lstrip("/")
-        return f"{self.api_url}/{endpoint}"
-
-    def _relative_url(self, url: str) -> str:
+    def _get_url(self, url: str) -> str:
         """Process the URL for API requests."""
-        return url.replace(self.site_url, "").lstrip("/")
+        if not url.startswith(self.api_url):
+            url = url.replace(self.site_url, "").lstrip("/").rstrip("/")
+            url = f"{self.api_url}/{url}"
+        return url
 
     def _batching_next_url(self, data: dict[str, str]) -> str | None:
         """Get the next URL for batching requests."""
         if url := data.get("next"):
-            return self._relative_url(url)
+            return self._get_url(url)
         return None
 
     def _make_request(

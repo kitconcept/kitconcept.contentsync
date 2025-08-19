@@ -1,4 +1,6 @@
+from collections.abc import Generator
 from kitconcept.contentsync import _types as t
+from kitconcept.contentsync.clients.plone import PloneClient
 from pathlib import Path
 from requests.exceptions import ConnectionError as RequestsConnectionError
 
@@ -71,6 +73,39 @@ def plone_config(plone_service) -> t.PloneConfig:
         username="admin",
         password="admin",  # noQA: S106, nosec B105
     )
+
+
+@pytest.fixture(scope="session")
+def plone_client(plone_config) -> Generator[PloneClient, None, None]:
+    client = PloneClient(config=plone_config)
+    yield client
+
+
+@pytest.fixture(scope="session")
+def populate_portal(plone_client) -> None:
+    plone_client.authenticate()
+    # Create a Document at the root of the portal
+    content = plone_client.create_content(
+        "/",
+        {
+            "@id": "/reports",
+            "@type": "Document",
+            "id": "reports",
+            "title": "Reports",
+        },
+    )
+    if content:
+        for idx in range(1, 99):
+            obj_id = f"report-{idx}"
+            plone_client.create_or_update_content(
+                {
+                    "@id": f"/reports/{obj_id}",
+                    "@type": "Document",
+                    "id": obj_id,
+                    "title": f"Report {idx}",
+                },
+            )
+    return
 
 
 def pytest_collection_modifyitems(config, items):
