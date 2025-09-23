@@ -14,7 +14,7 @@ class KeycloakPersonConverter(ItemConverter):
         ("first_name", "firstName"),
         ("last_name", "lastName"),
         ("contact_email", "email"),
-        ("title", "function")
+        ("function", "job_title")
     )
 
     def _field__transition(self, src: t.KeycloakUser) -> str:
