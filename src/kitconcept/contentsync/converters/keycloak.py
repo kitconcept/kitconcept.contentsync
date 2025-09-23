@@ -40,6 +40,14 @@ class KeycloakPersonConverter(ItemConverter):
         mobile = attrs.get("mobile", [""])[0]
         return phone or mobile
 
+    def _field_job_title(self, src: t.KeycloakUser) -> str:
+        """Extracts the job title from the user attributes."""
+        attrs = src.get("attributes", {}) or {}
+        job_title = attrs.get("function", "")[0]
+        return job_title
+
+
+
     def _blocks_factory_(self, src: t.KeycloakUser) -> VoltoBlocksInfo:
         """Constructs the blocks for the user."""
         attrs = src.get("attributes", {}) or {}
