@@ -43,7 +43,7 @@ class KeycloakPersonConverter(ItemConverter):
     def _field_job_title(self, src: t.KeycloakUser) -> str:
         """Extracts the job title from the user attributes."""
         attrs = src.get("attributes", {}) or {}
-        job_title = attrs.get("function", "")[0]
+        job_title = attrs.get("function", [""])[0]
         return job_title
 
 
