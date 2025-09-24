@@ -15,7 +15,8 @@ class KeycloakPersonConverter(ItemConverter):
         ("last_name", "lastName"),
         ("contact_email", "email"),
         ("function", "job_title"),
-        ("company", "subjects")
+        ("company", "subjects"),
+        ("department", "")
     )
 
     def _field__transition(self, src: t.KeycloakUser) -> str:
@@ -51,7 +52,16 @@ class KeycloakPersonConverter(ItemConverter):
     def _field_subjects(self, src: t.KeycloakUser) -> str:
         """Extracts the job title from the user attributes."""
         attrs = src.get("attributes", {}) or {}
-        subjects = attrs.get("company", [])
+        subjects = []
+
+        abteilung = attrs.get("company", [None])[0]
+        if abteilung:
+            subjects.append(f"Abteilung - {abteilung}")
+
+        organisationseinheit = attrs.get("department", [None])[0]
+        if organisationseinheit:
+            subjects.append(f"Organisationseinheit - {organisationseinheit}")
+
         return subjects
 
 
