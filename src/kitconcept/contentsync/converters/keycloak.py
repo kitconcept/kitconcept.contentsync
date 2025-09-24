@@ -14,7 +14,7 @@ class KeycloakPersonConverter(ItemConverter):
         ("first_name", "firstName"),
         ("last_name", "lastName"),
         ("contact_email", "email"),
-        ("function", "job_title")
+        ("function", "job_title"),
         ("company", "subjects")
     )
 
