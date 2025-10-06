@@ -33,11 +33,11 @@ class KeycloakPersonConverter(ItemConverter):
         return f"{last_name}, {first_name}"
 
     def _field_contact_phone(self, src: t.KeycloakUser) -> str:
-        """Constructs the title from the first and last name."""
+        """Extract the mobile or phone number from the user attributes."""
         attrs = src.get("attributes", {}) or {}
         phone = attrs.get("phone", [""])[0]
         mobile = attrs.get("mobile", [""])[0]
-        return phone or mobile
+        return mobile or phone
 
     def _blocks_factory_(self, src: t.KeycloakUser) -> VoltoBlocksInfo:
         """Constructs the blocks for the user."""
