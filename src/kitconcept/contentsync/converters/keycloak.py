@@ -39,6 +39,14 @@ class KeycloakPersonConverter(ItemConverter):
         mobile = attrs.get("mobile", [""])[0]
         return phone or mobile
 
+    def _field_academic_title(self, src: t.KeycloakUser) -> dict:
+        """Extracts the academic title from the user attributes."""
+        attrs = src.get("attributes", {}) or {}
+        fullname = attrs.get("fullname", [""])[0]
+        titles = ["Prof. Dr.", "Dr.", "Prof."]
+        academic_title = next((t for t in titles if t in fullname), "")
+        return {"title": academic_title, "token": academic_title}
+
     def _blocks_factory_(self, src: t.KeycloakUser) -> VoltoBlocksInfo:
         """Constructs the blocks for the user."""
         attrs = src.get("attributes", {}) or {}
